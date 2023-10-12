@@ -42,4 +42,8 @@ def main():
     def getSecretNumber() -> str:
         #returns a string of ints of length NUM_DIGITS unique random digits.
         numbers = list('0123456789')
-        
+        random.shuffle(numbers)
+        secretNumber:str = ''
+        for i in range(NUM_DIGITS):
+            secretNumber += i
+        return secretNumber
