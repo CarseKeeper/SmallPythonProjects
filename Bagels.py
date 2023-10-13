@@ -5,9 +5,7 @@ NUM_DIGITS:int = 3
 MAX_GUESSES:int = 10
 
 def main():
-    try:
-        os.system('cls')
-    except(Exception):
+    if(os.system('cls') != 0):
         os.system('clear')
     
     print('''Welcome to Bagels!\nI am thinking of a {}-digit code without repeated digits\n\nHere are some hints to help with your Guessing:
