@@ -1,0 +1,126 @@
+import copy, sys, os
+
+WALL = '#'
+EMPTY = ' '
+START = 'S'
+EXIT = 'E'
+BLOCK = chr(9617) #Character 9617 is the ''
+NORTH = 'NORTH'
+SOUTH = 'SOUTH'
+EAST = 'EAST'
+WEST = 'WEST'
+
+def wallStrToWallDict(wallStr):
+    wallDict: dict[tuple[int,int]] = {}
+    height:int = 0
+    width:int = 0
+    for y, line in enumerate(wallStr.splitlines()):
+        if y > height:
+            height = y
+        for x, character in enumerate(line):
+            if x > width:
+                width = x
+            wallDict[(x,y)] = character
+    wallDict['height'] = height + 1
+    wallDict['width'] = width + 1
+    return wallDict
+
+EXIT_DICT = {(0,0): 'E', (1,0): 'X', (2,0): 'I', (3,0): 'T', 'height': 1, 'width': 4}
+
+ALL_OPEN = wallStrToWallDict(r'''
+.................
+____.........____
+...|\......./|...
+...||.......||...
+...||__...__||...
+...||.|\./|.||...
+...||.|.X.|.||...
+...||.|/.\|.||...
+...||_/...\_||...
+...||.......||...
+___|/.......\|___
+.................
+.................'''.strip())
+
+CLOSED = {}
+CLOSED['A'] = wallStrToWallDict(r'''
+_____
+.....
+.....
+.....
+_____'''.strip())
+
+CLOSED['B'] = wallStrToWallDict(r'''
+.\.
+..\
+...
+...
+...
+../
+./.'''.strip())
+
+CLOSED['C'] = wallStrToWallDict(r'''
+___________
+...........
+...........
+...........
+...........
+...........
+...........
+...........
+...........
+___________'''.strip())
+
+CLOSED['D'] = wallStrToWallDict(r'''
+./.
+/..
+...
+...
+...
+\..
+.\.'''.strip())
+
+CLOSED['E'] = wallStrToWallDict(r'''
+..\..
+...\_
+....|
+....|
+....|
+....|
+....|
+....|
+....|
+....|
+....|
+.../.
+../..'''.strip())
+
+CLOSED['F'] = wallStrToWallDict(r'''
+../..
+_/...
+|....
+|....
+|....
+|....
+|....
+|....
+|....
+|....
+|....
+.\...
+..\..'''.strip())
+
+def displayWallDict(wallDict):
+    print(BLOCK * (wallDict['width'] + 2))
+    for y in range(wallDict['height']):
+        print(BLOCK, end='')
+        for x in range(wallDict['width']):
+            wall = wallDict[(x,y)]
+            if wall == '.':
+                wall = ' '
+            print(wall, end='')
+        print(BLOCK)
+    print(BLOCK * (wallDict['width'] + 2))
+    
+def pasteWallDict(srcWallDict, distWallDict, left, top):
+    pass
