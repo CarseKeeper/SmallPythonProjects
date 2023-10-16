@@ -45,7 +45,10 @@ If the number was 248 and you guessed 498, the clue would be Fermi Pico'''.forma
         print('\nDo you want to play again? (yes/no)')
         if not input('> ').lower().startswith('y'):
             break
+        if(os.system('cls') != 0):
+                os.system('clear')
     print('Thanks for playing!') #Always be curteous
+    
     
 def getSecretNumber() -> str:
     #Returns a string of ints of length NUM_DIGITS unique random digits.
